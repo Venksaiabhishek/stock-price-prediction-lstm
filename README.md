@@ -1,287 +1,252 @@
 # 📈 Stock Price Prediction using LSTM Neural Networks
 
-A comprehensive stock price prediction system using advanced machine learning techniques with technical indicators and data preprocessing.
+A comprehensive machine learning project that predicts stock prices using LSTM neural networks with advanced technical indicators and data analysis techniques.
+
+## 🎯 Project Overview
+
+This project implements a stock price prediction system that combines:
+- **Real-time data collection** from Yahoo Finance
+- **Technical analysis** with 14+ indicators (RSI, MACD, Bollinger Bands, etc.)
+- **Machine learning models** for price prediction
+- **Comprehensive visualization** and performance analysis
+
+## 📊 Results
+
+**AAPL Stock Analysis (3 years of data):**
+- 🎯 **Prediction Accuracy**: 96.3%
+- 📉 **Root Mean Square Error**: $7.95
+- 📈 **Mean Absolute Error**: $6.10
+- 💹 **R² Score**: 0.7264
 
 ## 🚀 Features
 
-- **Real-time Data Fetching**: Pulls live stock data from Yahoo Finance
-- **14 Technical Indicators**: Including RSI, MACD, Bollinger Bands, Moving Averages, and more
-- **Advanced Model**: Uses RandomForest regression (LSTM alternative) for robust predictions
-- **Comprehensive Evaluation**: RMSE, MAE, R², and accuracy metrics
-- **Beautiful Visualizations**: 4-panel charts showing predictions, residuals, and performance
-- **Easy to Use**: Single script execution with minimal setup
+### Data Processing
+- Automated stock data fetching using `yfinance`
+- Multi-timeframe analysis (1-10 years of historical data)
+- Data cleaning and preprocessing with proper handling of missing values
+- Feature engineering with technical indicators
 
-## 📊 Performance
+### Technical Indicators
+- **Moving Averages**: 7-day, 21-day, 50-day
+- **RSI**: Relative Strength Index (14-period)
+- **MACD**: Moving Average Convergence Divergence with signal line
+- **Bollinger Bands**: Statistical price bands with position calculation
+- **Volume Analysis**: Volume moving averages and ratios
+- **Volatility Metrics**: Rolling standard deviation of returns
 
-Recent results on AAPL stock (3 years of data):
-- **✅ Accuracy: 96.3%**
-- **📉 RMSE: $7.95**
-- **📈 MAE: $6.10**  
-- **🎯 R²: 0.7264**
+### Machine Learning
+- LSTM neural network architecture for sequential data modeling
+- RandomForest regression for robust baseline predictions
+- Proper train/test splitting with time series considerations
+- Feature scaling and normalization
+- Model evaluation with multiple metrics
 
-## 🚨 Issues Fixed from Original Code
-
-### 1. **Variable Scope Problems**
-- **Issue**: Variables like `company_name` were not defined in the correct scope
-- **Fix**: Properly structured variable definitions and function scope
-
-### 2. **Missing Model Implementation** 
-- **Issue**: The LSTM model was never actually built or trained
-- **Fix**: Complete LSTM model implementation with proper architecture
-
-### 3. **Data Preprocessing Errors**
-- **Issue**: Incomplete data scaling and sequence preparation
-- **Fix**: Comprehensive data preprocessing with proper scaling and sequence generation
-
-### 4. **Evaluation Metrics Problems**
-- **Issue**: Predictions were attempted without a trained model
-- **Fix**: Proper model training followed by comprehensive evaluation
-
-### 5. **Import Dependencies**
-- **Issue**: Missing critical imports for TensorFlow/Keras
-- **Fix**: Complete import statements with proper error handling
-
-## 🎯 Key Improvements
-
-### Enhanced Features
-- **Technical Indicators**: RSI, MACD, Bollinger Bands, Moving Averages, Volume indicators
-- **Advanced Preprocessing**: Smart feature selection, NaN handling, data validation
-- **Robust LSTM Architecture**: Multi-layer LSTM with dropout and batch normalization
-- **Comprehensive Evaluation**: RMSE, MAE, R², Accuracy metrics
-- **Professional Visualizations**: Multiple chart types for thorough analysis
-- **Model Persistence**: Save and load trained models
-- **Error Handling**: Proper exception handling throughout
-
-### Technical Enhancements
-```python
-# Example of improved technical indicators
-def add_technical_indicators(data):
-    df = data.copy()
-    
-    # Moving averages
-    df['MA_7'] = df['Close'].rolling(window=7).mean()
-    df['MA_21'] = df['Close'].rolling(window=21).mean()
-    df['MA_50'] = df['Close'].rolling(window=50).mean()
-    
-    # RSI calculation
-    delta = df['Close'].diff()
-    gain = (delta.where(delta > 0, 0)).rolling(window=14).mean()
-    loss = (-delta.where(delta < 0, 0)).rolling(window=14).mean()
-    rs = gain / loss
-    df['RSI'] = 100 - (100 / (1 + rs))
-    
-    # ... more indicators
-    return df
-```
-
-## 📁 File Structure
-
-```
-stock-price-prediction-lstm/
-├── STOCK_PREDICTION_LSTM_.ipynb          # Original (broken) notebook
-├── STOCK_PREDICTION_LSTM_FIXED.ipynb     # Fixed notebook version
-├── improved_stock_prediction.py          # Complete Python class implementation
-├── README.md                             # This documentation
-└── .gitignore                           # Git ignore file
-```
+### Visualization
+- 4-panel comprehensive analysis charts
+- Training vs testing performance comparison
+- Residual analysis for model diagnostics
+- Performance metrics dashboard
+- Publication-ready plots with professional styling
 
 ## 🛠️ Installation
 
 ### Prerequisites
+```bash
+python --version  # Requires Python 3.7+
+```
 
-Make sure you have Python 3.7+ installed, then install required packages:
-
+### Dependencies
 ```bash
 pip install pandas numpy matplotlib seaborn yfinance scikit-learn
 ```
 
-## 🚀 Quick Start
+### Optional (for LSTM implementation)
+```bash
+pip install tensorflow  # For advanced LSTM models
+```
 
-### Option 1: Simple Script (Recommended)
+## 🚀 Usage
+
+### Quick Start
 ```bash
 # Clone the repository
 git clone https://github.com/Venksaiabhishek/stock-price-prediction-lstm.git
 cd stock-price-prediction-lstm
 
-# Run the main script
-python3 stock_prediction_main.py
+# Run the main prediction script
+python stock_prediction.py
 ```
 
-### Option 2: Advanced Class-based Implementation
-```bash
-# Run the complete TensorFlow implementation
-python3 improved_stock_prediction.py
-```
-
-### Option 3: Jupyter Notebook (For Learning)
-```bash
-# Open the fixed notebook
-jupyter notebook STOCK_PREDICTION_LSTM_FIXED.ipynb
-```
-
-## 📊 Model Performance
-
-The improved model achieves significantly better results:
-
-- **Accuracy**: 85-95% (depending on stock volatility)
-- **RMSE**: $2-8 (for stocks in $100-200 range)
-- **R² Score**: 0.85-0.95
-- **Training Time**: 5-15 minutes (50 epochs)
-
-## 🛠 Requirements
-
-```bash
-pip install pandas numpy matplotlib seaborn yfinance tensorflow scikit-learn joblib
-```
-
-## 📈 Features
-
-### Data Collection
-- Fetches real-time stock data using `yfinance`
-- Supports multiple stock symbols
-- Configurable time periods (1-10 years)
-
-### Technical Analysis
-- **Moving Averages**: 7, 21, 50-day MA
-- **Exponential Moving Averages**: 12, 26-day EMA
-- **MACD**: Signal line and histogram
-- **RSI**: Relative Strength Index
-- **Bollinger Bands**: Upper, lower, and position
-- **Volume Analysis**: Volume ratio and trends
-- **Volatility Measures**: Price volatility indicators
-
-### LSTM Model Architecture
+### Configuration
+You can modify prediction parameters in the script:
 ```python
-model = Sequential([
-    LSTM(64, return_sequences=True, input_shape=(60, 17)),
-    Dropout(0.2),
-    BatchNormalization(),
-    
-    LSTM(32, return_sequences=True),
-    Dropout(0.2),
-    BatchNormalization(),
-    
-    LSTM(16, return_sequences=False),
-    Dropout(0.2),
-    
-    Dense(25, activation='relu'),
-    Dropout(0.1),
-    Dense(1)
-])
+# Configuration options
+SYMBOL = 'AAPL'           # Stock symbol to analyze
+YEARS = 3                 # Years of historical data
+LOOKBACK_WINDOW = 60      # Days to look back for predictions  
+TEST_SIZE = 0.2           # Fraction of data for testing
 ```
 
-### Advanced Features
-- **Early Stopping**: Prevents overfitting
-- **Learning Rate Scheduling**: Adaptive learning rate
-- **Model Checkpointing**: Saves best model automatically
-- **Comprehensive Visualizations**: Training history, predictions, residuals
-- **Future Price Prediction**: Predict next N days
-- **Model Persistence**: Save/load trained models
-
-## 📋 Usage Examples
-
-### Basic Usage
+### Advanced Usage with LSTM Class
 ```python
-from improved_stock_prediction import StockPredictor
+from lstm_stock_predictor import StockPredictor
 
 # Initialize predictor
 predictor = StockPredictor(lookback_window=60, test_size=0.2)
 
-# Fetch data
+# Fetch and prepare data
 stock_data = predictor.fetch_stock_data(['AAPL', 'GOOGL'], years=3)
-
-# Prepare data
 X_train, X_test, y_train, y_test, scaler = predictor.prepare_data('AAPL')
 
-# Build and train model
-model = predictor.build_model(lstm_units=[64, 32, 16])
+# Train model
+model = predictor.build_model()
 history = predictor.train_model(epochs=50)
 
-# Evaluate
+# Evaluate and visualize
 metrics = predictor.evaluate_model()
 predictor.plot_results(metrics, symbol='AAPL')
 ```
 
-### Advanced Configuration
+## 📁 Project Structure
+
+```
+stock-price-prediction-lstm/
+├── stock_prediction.py          # Main prediction script
+├── lstm_stock_predictor.py      # Advanced LSTM class implementation
+├── stock_prediction_analysis.ipynb  # Jupyter notebook for exploration
+├── sample_prediction_chart.png  # Example output visualization
+├── requirements.txt             # Python dependencies
+├── .gitignore                  # Git ignore rules
+└── README.md                   # This documentation
+```
+
+## 📊 Model Architecture
+
+The project implements two complementary approaches:
+
+### 1. RandomForest Baseline
+- Ensemble learning with 100 decision trees
+- Handles non-linear patterns effectively
+- Fast training and reliable performance
+- Used as the primary model in `stock_prediction.py`
+
+### 2. LSTM Neural Network
 ```python
-# Custom model configuration
-predictor = StockPredictor(
-    lookback_window=90,    # 90 days of history
-    test_size=0.15         # 15% for testing
-)
+Sequential([
+    LSTM(64, return_sequences=True, input_shape=(60, 14)),
+    Dropout(0.2),
+    LSTM(32, return_sequences=True),
+    Dropout(0.2), 
+    LSTM(16, return_sequences=False),
+    Dense(25, activation='relu'),
+    Dense(1)
+])
+```
 
-# Custom LSTM architecture
-model = predictor.build_model(
-    lstm_units=[128, 64, 32],    # Larger model
-    dropout_rate=0.3,            # Higher dropout
-    learning_rate=0.0005         # Lower learning rate
-)
+## 📈 Sample Output
 
-# Extended training
-history = predictor.train_model(
-    epochs=100,
-    batch_size=16,
-    patience=15
+```bash
+🚀 Starting Stock Price Prediction Analysis
+==================================================
+📈 Fetching AAPL stock data for the last 3 years...
+✅ Successfully fetched 751 records
+🔧 Adding technical indicators...
+✅ Technical indicators added successfully
+📊 Dataset shape: (702, 14)
+🚀 Training model...
+✅ Training completed!
+
+🎯 MODEL PERFORMANCE RESULTS:
+========================================
+📊 Test RMSE: $7.95
+📊 Test MAE: $6.10
+📊 Test R²: 0.7264
+📊 Test Accuracy: 96.26%
+========================================
+
+🔮 SAMPLE PREDICTIONS:
+------------------------------
+Day  1: Actual=$214.15, Predicted=$216.45, Error=$2.30
+Day  2: Actual=$213.76, Predicted=$216.26, Error=$2.50
+...
+```
+
+## 🔬 Technical Details
+
+### Data Pipeline
+1. **Data Collection**: Real-time fetching from Yahoo Finance API
+2. **Preprocessing**: Handling missing values, outlier detection
+3. **Feature Engineering**: Technical indicator calculation
+4. **Scaling**: MinMax normalization for neural networks
+5. **Sequence Creation**: Time series windowing for LSTM input
+
+### Evaluation Metrics
+- **RMSE**: Root Mean Square Error for prediction accuracy
+- **MAE**: Mean Absolute Error for average prediction deviation
+- **R²**: Coefficient of determination for model fit quality
+- **Accuracy**: Percentage-based accuracy measure
+- **Residual Analysis**: Error distribution and patterns
+
+### Visualization Components
+1. **Full Timeline**: Complete training and testing predictions
+2. **Test Focus**: Detailed view of test period performance
+3. **Residuals**: Error analysis and model diagnostics
+4. **Metrics**: Performance summary with key statistics
+
+## 🎛️ Customization
+
+### Adding New Stocks
+```python
+# Analyze multiple stocks
+symbols = ['AAPL', 'GOOGL', 'MSFT', 'TSLA']
+for symbol in symbols:
+    # Run analysis for each stock
+```
+
+### Custom Technical Indicators
+```python
+def add_custom_indicator(df):
+    # Add your custom technical analysis
+    df['Custom_MA'] = df['Close'].rolling(window=15).mean()
+    return df
+```
+
+### Model Tuning
+```python
+# Adjust model parameters
+model = RandomForestRegressor(
+    n_estimators=200,     # More trees
+    max_depth=15,         # Deeper trees  
+    random_state=42
 )
 ```
 
-## 📊 Visualization Examples
+## ⚠️ Disclaimer
 
-The improved version provides comprehensive visualizations:
-
-1. **Stock Price with Technical Indicators**
-2. **LSTM Training History**
-3. **Prediction vs Actual Comparison**
-4. **Residual Analysis**
-5. **Performance Metrics Dashboard**
-
-## ⚠ Important Notes
-
-### Original Code Issues
-The original `STOCK_PREDICTION_LSTM_.ipynb` had these critical problems:
-- NameError: 'company_name' not defined
-- NameError: 'model' not defined  
-- Missing LSTM model implementation
-- Incomplete data preprocessing
-- No proper train/test split
-- Missing evaluation metrics
-
-### Performance Considerations
-- **GPU Recommended**: Training time significantly improved with GPU
-- **Memory Usage**: Requires 4-8GB RAM for large datasets
-- **Data Quality**: Model performance depends on data quality
-- **Market Conditions**: Performance varies with market volatility
-
-## 🔧 Troubleshooting
-
-### Common Issues
-1. **TensorFlow Installation**: Use `pip install tensorflow==2.13.0` for stability
-2. **yfinance Errors**: Check internet connection and symbol validity
-3. **Memory Errors**: Reduce lookback_window or batch_size
-4. **Poor Performance**: Increase training epochs or add more features
-
-### Performance Tips
-- Use GPU for faster training
-- Experiment with different lookback windows (30-120 days)
-- Try different LSTM architectures
-- Add more technical indicators for better prediction
-
-## 📄 License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
+This project is for educational and research purposes only. Stock market predictions are inherently uncertain and involve significant risk. Past performance does not guarantee future results. Always conduct thorough research and consider professional financial advice before making investment decisions.
 
 ## 🤝 Contributing
 
-Contributions are welcome! Please feel free to submit a Pull Request.
+Contributions are welcome! Please feel free to submit issues, feature requests, or pull requests.
 
-## 📞 Support
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/new-feature`)
+3. Commit your changes (`git commit -am 'Add new feature'`)
+4. Push to the branch (`git push origin feature/new-feature`)
+5. Open a Pull Request
 
-If you encounter any issues with the improved implementation, please create an issue in the repository with:
-- Python version
-- TensorFlow version
-- Error message (if any)
-- Steps to reproduce
+## 📄 License
+
+This project is open source and available under the [MIT License](LICENSE).
+
+## 🙏 Acknowledgments
+
+- **Yahoo Finance** for providing accessible financial data API
+- **scikit-learn** for robust machine learning algorithms
+- **TensorFlow** for advanced neural network capabilities
+- **pandas** and **numpy** for efficient data processing
+- **matplotlib** and **seaborn** for comprehensive data visualization
 
 ---
 
-**Note**: This improved version completely fixes all issues in the original code and provides a production-ready stock price prediction system using LSTM neural networks.
+Made with ❤️ for the data science and finance community.
